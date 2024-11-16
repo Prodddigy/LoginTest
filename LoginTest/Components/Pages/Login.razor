@@ -1,0 +1,38 @@
+﻿@using System.Security.Claims
+@using LoginTest.Components.MiddleWare
+@using Microsoft.AspNetCore.Authentication.Cookies
+
+@page "/login"
+<h3>Login</h3>
+@inject NavigationManager nav
+
+Press here to login
+<MudButton OnClick="LoginPls" Variant="Variant.Filled" Color="Color.Primary">
+	
+	<MudText >
+		Login
+</MudText>
+
+</MudButton>
+
+@code {
+	public async Task LoginPls()
+	{
+
+		var claims = new List<Claim>
+		{
+			new Claim(ClaimTypes.Name,"M Alvin Maulana"),
+			new Claim(ClaimTypes.Role,"User"),
+		};
+
+		var claimIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+		ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal(claimIdentity);
+		Guid key = Guid.NewGuid();
+
+		Middleware.Logins[key] = claimsPrincipal;
+
+		nav.NavigateTo($"/login?key={key}", true);
+
+	}
+}
