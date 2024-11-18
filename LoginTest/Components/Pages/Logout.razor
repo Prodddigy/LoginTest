@@ -6,7 +6,15 @@
 
 @inject NavigationManager navi
 
+@layout Layout.StaticSsrLayout
+
+
+
 <h3>Logout</h3>
+
+
+You have logged out
+
 
 @code {
 	[CascadingParameter]
@@ -17,6 +25,22 @@
 	protected override async Task OnInitializedAsync()
 	{
 		await httpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-		navi.NavigateTo("/");
+
+
+		// while (httpContext.User?.Identity.IsAuthenticated != false)
+		// {
+		// 	Thread.Sleep(1000);
+		// 	Console.WriteLine(httpContext.User?.Identity.IsAuthenticated.ToString());
+		// }
+
+		// Console.WriteLine(httpContext.User?.Identity.IsAuthenticated.ToString());
+
+		// Console.WriteLine("loggedout");
+		//navi.NavigateTo(navi.Uri, forceLoad: true);
+
+
+		navi.NavigateTo("/",forceLoad: true);
+
+		
 	}
 }

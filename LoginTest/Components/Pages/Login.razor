@@ -3,8 +3,14 @@
 @using Microsoft.AspNetCore.Authentication.Cookies
 
 @page "/login"
+
+@rendermode InteractiveServer
+
 <h3>Login</h3>
 @inject NavigationManager nav
+
+
+
 
 Press here to login
 <MudButton OnClick="LoginPls" Variant="Variant.Filled" Color="Color.Primary">

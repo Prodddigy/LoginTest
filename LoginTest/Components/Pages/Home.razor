@@ -2,7 +2,15 @@
 @using Microsoft.AspNetCore.Components.Authorization
 @using System.Security.Claims
 
+@rendermode InteractiveServer
+
 @inject AuthenticationStateProvider auth
+
+@inject NavigationManager navi
+
+
+
+
 
 
 <PageTitle>Home</PageTitle>
@@ -11,9 +19,9 @@
 
 <Microsoft.AspNetCore.Components.Authorization.AuthorizeView>
 <Authorized>
-	Hello @Name !!! You are logged in!!!
+			<a href="/logout">Logout</a>Hello @Name !!! You are logged in!!!
 
-	Press here to logout -><a href="/logout">Logout</a>
+	Press here to logout ->
 </Authorized>
 	
 
@@ -36,12 +44,19 @@
 Welcome to your new app.
 
 
+
+
+
+
 @code {
 
 	public string Name { get; set; }
 
+
+
 	protected async override Task OnInitializedAsync()
 	{
+		
 		var state = await auth.GetAuthenticationStateAsync();
 
 		var Name1 = state.User;
